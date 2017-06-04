@@ -55,6 +55,9 @@ body {
 .main-body-content {
 	width: 80%;
 	
+	display:block;
+	overflow: auto;
+	
 	padding: 16px;
 	margin: 0 auto;
 	
