@@ -1,0 +1,279 @@
+<html>
+	<head>
+		<title>Ontology Abstraction Framework (OAF) by SABOC</title>
+	
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+
+	<body>
+		<div class = 'header'>
+			Ontology Abstraction Framework (OAF)
+		</div>
+		
+		<div class = 'lower-header-outside'>
+			<div class = 'lower-header-content'>
+				<div id = "navBar"><a href = "index.html">Home</a></div>
+				<div id = "navBar"><a href = "about.html">About</a></div>
+				<div id = "navBar"><a href = "pubs.html">Publications</a></div>
+				<div id = "navBar"><a href = "contact.html">Contact</a></div>
+				<div id = "navBar"><a href = "https://github.com/NJITSABOC" target="_new">GitHub</a></div>
+			</div>
+		</div>
+		
+		<div style ="height: 16px;"></div>
+
+		<div class = 'main-body-content'> 
+		
+		<h2>About the Ontology Abstraction Framework (OAF)</h2>
+		<ol>
+			<li><a href="#abns">What is an Abstraction Network?</a></li>
+			<li><a href="#features">Features of the OAF</a></li>
+			<li><a href="#comparison">Comparison of OAF Versions</a></li>
+			<li><a href="#install">Installing and Running the OAF</a></li>
+		
+		</ol>
+
+		<h3 id="abns">1. What is an Abstraction Network?</h3>
+		An abstraction network is an algorithmically-derived summary of an ontology's structure and content. We have developed, and the OAF supports,
+		several kinds of abstraction networks (described below), each of which summarizes a different aspects of an ontology's structure. 
+		In general, sets of "similar" concepts, for a defined metric of sturctural similarity, are grouped together into a "node." Nodes 
+		are organized into a hierarchy based on the underlying hierarchical relationships of the ontology.
+		
+		<div style="text-align: center;">
+			<img src = "images/NeoplasmExample.png"><br>
+			Excerpt of an abstraction network in the OAF for the NCIt Neoplasm subhierarchy
+		</div>
+		
+		<h4>1.1. Types of Abstraction Networks Supported by the OAF</h4>
+		The OAF supports the following kinds of abstraction networks:
+		
+		<ul>
+			<li><b>Partial-area Taxonomies: </b> Summarize subhierarchies of concepts that are modeled with the same types of 
+			defining relationships (e.g., properties in OWL, relationships in OBO, and attribute relationships in SNOMED CT). Concepts 
+			are separated into disjoint sets called <i>areas</i>, which contain of concepts with the exact same set of defining relationships.
+			Areas are separated into <i>partial-areas</i>, which summarize subhierarchies of semantically similar concepts in each area.</li><p>
+			
+			<li><b>Disjoint Partial-area Taxonomies: </b> When an ontology allows concepts to have multiple parents a given 
+			concept may be summarized by multiple partial-areas, according to which subhierarchies it belongs to. A disjoint partial-area 
+			taxonomy separates concepts into disjoint sets called <i>disjoint partial-areas</i>, which visually identify points of intersection 
+			between partial-areas.</li><p>
+			
+			<li><b>Tribal Abstraction Network (TAN): </b> Summarize the intersections between user-selected subhierarchies in an ontology. 
+			Concepts are partitioned into disjoint sets called <i>bands</i>, which identify the subhierarchy/subhierarchies a set of concepts 
+			belongs to. Bands are partitioned into <i>clusters</i>, which identify subhierarchies of concepts that exist at a specific 
+			point of intersection between two or more subhierarchies.</li><p>
+			
+			<li><b>Disjoint Tribal Abstraction Networks: </b> As with partial-areas, a given concept may be summarized by multiple 
+			clisters. A Disjoint TAN separates concepts into disjoint units called <i>disjoint clusters</i>, which summarize the points of 
+			intersection between clusters in a band.</li><p>
+			
+			<li><b>Target Abstraction Network (Target AbN): </b> Also called <i>Range AbN</i> (when applied to OWL/OBO ontologies) or 
+			<i>Ingredient AbN</i> (when applied to NDF-RT). Summarizes subhierarchies of concepts that serve as targets for defining 
+			relationships, along with the concepts have relationships pointing to the target concepts.</li>
+		</ul>
+		
+		<div style="text-align: center;">
+			<img src = "images/OAFProtege.png"><br>
+			A Tribal Abstraction Network (TAN) created from a NCIt subhierarchy in the OAF Protege Plugin
+		</div>
+		
+		<h4>1.2. Live Abstraction Networks</h4>
+		A Live Abstraction Network is an abstraction network that updates as an ontology is edited. The Protege Plugin version of the OAF 
+		includes in-development functionality for live abstraction networks. As you edit your ontology, the summary provided by the 
+		abstraction network will accurately reflect the current state of your ontology. We have tested live abstraction network functionality 
+		with each of the above abstraction network types.
+		
+		<p>
+		
+		Live abstraction networks in the OAF Protege Plugin also include the ability to switch back and forth between abstraction networks 
+		created from the asserted relationships of an ontology and the inferred relationships of an ontology.
+		
+		<h4>1.3. Diff Abstraction Networks</h4>
+		A Diff Abstraction Network is an abstraction network that summarizes changes to an ontology's structure. The OAF framework includes 
+		programmatic functionality for creating diff abstraction networks for any kind of abstraction network. However, the current user-facing 
+		version of the OAF only includes a user interface for Diff Partial-area Taxonomies, which summarize changes to subhierarchies of 
+		structurally and semantically similar concepts. Diff partial-area taxonomies can be derived in the standalone versions of the OAF for 
+		OWL/OBO and SNOMED CT. Additional diff partial-area taxonomy is available in specific OAF versions.
+		
+		<h5>1.3.1. Live Diff Partial-area Taxonomies</h5>
+		The OAF Protege Plugin includes initial support for Live Diff Partial-area Taxonomies, which summarize changes to your ontology as you 
+		are editing it. Live diff partial-area taxonomies can be derived from a fixed version of the ontology or progressively as each edit is applied. 
+		Additionally, live diff partial-area taxonomies can be derived using asserted relationships or inferred relationships, and changes can be 
+		tracked across both.
+		
+		<div style="text-align: center;">
+			<img src = "images/OAFDiff.png"><br>
+			Live Diff Partial-area Taxonomy view in the OAF Protege Plugin
+		</div>
+		
+		<h5>1.3.2. Visual Semantic Delta</h5>
+		The OAF for SNOMED CT includes support for Visual Semantic Deltas, which provide concept-level change information.
+
+		<h3 id = "features">2. Ontology Abstraction Framework (OAF) Features</h3>
+		All versions of the OAF include two main components: a system for creating, visualizing, and exploring various kinds of abstraction networks 
+		and a text-diagram hybrid concept browser. 
+		
+		<h4>2.1. Abstraction Networks in the OAF</h4>
+		Every version of the OAF can derive all of the abstraction networks described above. Each abstraction network can be created for an 
+		arbitrary subhierarchy of concepts, as long as the subhierarchy has an appropriate structure. Additionally, the OAF includes various 
+		processes for creating/extracting subsets of abstraction networks. A process of <i>aggregation</i> can also be applied to hide nodes 
+		that summarize relative few concepts. Each version of the OAF includes also includes custom functionality, described below.
+		
+		
+		<h4>2.2. OAF Concept Browser</h4>
+		Every version of the OAF includes a concept browser based on our previously developed Neighborhood Auditing Tool (NAT) for the Unified 
+		Medical Lanauge System (UMLS). This browser provides a text-diagram hybrid view of an ontology. The OAF Concept Browser was designed to 
+		facilitate the auditing of ontology content by domain experts. The OAF Concept Browser includes functionality for marking perceived errors in 
+		an ontology. To access this functionality, create or open an "Audit Set." When an audit set is loaded errors can be reported by 
+		right clicking on a concept or relationship.
+		
+		<div style="text-align: center;">
+			<img src = "images/SNOMEDBrowser.png"> <br>
+			Tetralogy of Fallot displayed in OAF Concept Browser for SNOMED CT
+		</div>
+		
+		<h3 id="comparison">3. Comparison of OAF Versions</h3>
+		
+		<table style = "width: 100%;">
+			<tr style="font-weight: bold;">
+				<td style="width: 33%;">OAF Protege Plugin</td>
+				<td style="width: 33%;">OAF for OWL/OBO</td>
+				<td style="width: 33%;">OAF for SNOMED CT</td>
+			</tr>
+			
+			<tr>
+				<td style ="border-right: 1px solid black; padding-right: 10px;">
+					<ul>
+						<li>Support for OWL/OBO ontologies in Protege 5.2</li>
+						<li>Integrated into the Protege ontology editing environment</li>
+						<li>OAF and Concept Browser included in tabs</li>
+						<li>Live Abstraction Networks, which update as an ontology is edited</li>
+						<li>Derive abstraction networks using asserted or inferred relationships</li>
+						<li>Live Diff Partial-area Taxonomy ontology view, which summarizes structural changes as an ontology is edited</li>
+					</ul>
+					
+					<a href="https://github.com/NJITSABOC/oaf-protege/releases/download/1.0.0-Beta/oaf-protege-1.0.0.jar">Download OAF Protege Plugin</a>
+				</td>
+				
+				<td style ="border-right: 1px solid black; vertical-align: top; padding-right: 10px;">
+					<ul>
+						<li>Standalone OAF version</li>
+						<li>Support for OWL/OBO ontologies</li>
+						<li>Support for Diff Partial-area Taxonomies</li>
+						<li>Support for Import Subtaxonomies, which summarize 
+						concepts originating from a specific reused ontology</li>
+						
+					</ul>
+					
+					<a href="https://github.com/NJITSABOC/oaf-owl/releases/download/1.0.0-Beta1/oaf-owl-1.0.0.zip">Download OAF for OWL/OBO</a>
+				</td>
+				
+				<td style ="vertical-align: top; padding-right: 10px;">
+					<ul>
+						<li>Standalone OAF version</li>
+						<li>Support for SNOMED CT RF1/RF2 formats</li>
+						<li>Support for stated and inferred relationships</li>
+						<li>Support for Visual Semantic Delta, which computes 
+						concept-specific change information</li>
+					</ul>
+					
+					<a href="https://github.com/NJITSABOC/oaf-snomed/releases/download/1.0.0-Beta/oaf-snomed-1.0.0.zip">Download OAF for SNOMED CT</a>
+				</td>
+			
+			</tr>
+		
+		</table>
+		
+		<p>
+		<p>
+		
+		<div style="text-align: center;">
+			<img src = "images/SNOMEDAbN.png"> <br>
+			The Bacterial Infectious Disease partial-area taxonomy in the OAF for SNOMED CT
+		</div>
+
+		<h3 id = "install">4. Installing and Running the OAF</h3>
+		
+		<h4>4.1. OAF Protege Plugin</h4>
+		The OAF Protege Plugin requires Protege 5.2 or newer (desktop version). The newest version of Protege can be downloaded at the  
+		<a href = "http://protege.stanford.edu/" target = "_new">Protege website</a>.
+		
+		<p>
+		
+		<ol>
+			<li><a href="">Download OAF Protege Plugin</a> (oaf-protege-1.0.0.jar)</li>
+			<li>Locate the local directory Protege was installed in</li>
+			<li>Place the oaf-protege.jar file in Protege's <b>plugins</b> folder</li>
+			<li>Start Protege</li>
+			<li>Open an ontology</li>
+			<li>To view the OAF Abstraction Network tool click on: "Window -> Tabs -> Ontology Abstraction Network (OAF)"</li>
+			<li>To view the OAF Class Browser click on: "Window -> Tabs -> Ontology Abstraction Network (OAF) Class Browser"</li>
+			<li>To include a Live Diff Partial-area Taxonomy view click on: "Windows -> Views -> Ontology Views -> Ontology Abstraction Framework (OAF) Live Diff Taxonomies". 
+				<br>It is recommended that you include the Live Diff Partial-area Taxonomy view in Protege's Entities tab.</li>
+		</ol>
+		
+		Some consideration when using the OAF Protege Plugin:
+		
+		<ul>
+			<li>The OAF Abstraction Network tool and OAF Class Browser need to know where a given ontology is saved. You need to load (or save) an ontology file 
+			before these tools can be used.</li>
+			
+			<li>The default Java Heap space specified for Protege may be too small when large ontologies/large abstraction networks are displayed. To increase 
+			this size in Windows, right click on "run.bat" in Protege's installation directory and open the file in a text editor. Change -Xmx500M to -Xmx2G. </li>
+			
+			<li>The OAF Abstraction Network tool and OAF Class Browser will use the asserted hierarachical relationships of an ontology until a reasoner is applied. 
+			When a reasoner is running the inferred hierarchical relationships will be used.</li>
+		</ul>
+		
+		<h4>4.2. OAF for OWL/OBO</h4>
+		The OAF for OWL/OBO requires Java 8 or better, available here: <a href="https://www.java.com/en/download/" target="_new">Download Java</a>.
+		
+		<ol>
+			<li><a href="">Download OAF for OWL/OBO</a> (oaf-owl-1.0.0.zip)</li>
+			<li>Extract the contents of oaf-owl.zip to an easy-to-find directory. The Desktop is recommended.</li>
+			<li>Navigate to where you exacted the contents of oaf-owl.zip</li>
+			<li>If you are using Windows, double click on "run oaf.bat" to launch the complete OAF and "run class browser" to run only the 
+				OAF Class Browser. If you are not using Windows, double click on oaf-owl.jar.</li>
+			<li>Click on Open an Ontology (.owl/.obo) and select an appropriate ontology file. The ontology will be loaded into the OAF.</li>
+		</ol>
+		
+		Some consideration when using the OAF for OWL/OBO:
+		
+		<ul>
+			<li>The OAF for OWL/OBO uses the asserted relationships of an ontology. There is currently no support for reasoning in the 
+			standalone OAF for OWL/OBO, though it is planned as a future feature.</li>
+		</ul>
+		
+		<h4>4.3. OAF for SNOMED CT</h4>
+		
+		The OAF for SNOMED CT requires Java 8 or better, available here: <a href="https://www.java.com/en/download/" target="_new">Download Java</a>.
+		
+		<ol>
+			<li><a href="">Download OAF for SNOMED CT</a> (oaf-snomed-1.0.0.zip)</li>
+			<li>Extract the contents of oaf-snomed.zip to an easy-to-find directory. The Desktop is recommended.</li>
+			<li>Navigate to where you exacted the contents of oaf-snomed.zip</li>
+			<li>If you are using Windows, double click on "run oaf.bat" to launch the complete OAF for SNOMED CT and "run concept browser" to run only the 
+				OAF Concept Browser. If you are not using Windows, double click on oaf-snomed.jar.</li>
+				
+			<li>Click on "Select Folder Containing SNOMED CT Release(s) and select a folder that contains one or more International SNOMED CT releases</li>
+			<li>The releases will be listed in the drop down box to the right of the button. Select a release and then click "Load".</li>
+		</ol>
+		
+		Some consideration when using the OAF for SNOMED CT:
+		
+		<ul>
+			<li>Currently the OAF for SNOMED CT supports the International Release of SNOMED CT. It can be in RF1 or RF2 format. 
+			Support for country-specific releases is planned (though it may currently work with some US Extension releases).</li>
+			
+			<li>The OAF for SNOMED CT requires that SNOMED CT release files are in the appropriate directory. For example, the July 2016 international release 
+			should be located in a folder named "SnomedCT_RF2Release_INT_20160731" (the same folder that is included in the International Release download 
+			from the NLM UTS: <a href = "https://www.nlm.nih.gov/healthit/snomedct/international.html" target ="_new">
+			https://www.nlm.nih.gov/healthit/snomedct/international.html</a>
+		</ul>
+		
+			
+		</div>
+		
+		<div style ="height: 16px;"></div>
+	</body>
+</html>
